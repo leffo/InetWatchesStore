@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var string $content - входные данные для шаблона
+ */
+?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -10,6 +15,8 @@
 <body>
 
 <h1>Шаблон DEFAULT</h1>
+
+<?=$content;?>
 
 </body>
 </html>
