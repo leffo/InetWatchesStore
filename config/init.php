@@ -8,7 +8,7 @@ define("CORE", ROOT . '/vendor/ishop/core');
 define("LIBS", CORE . '/libs');
 define("CACHE", ROOT . '/tmp/cache');
 define("CONF", ROOT . '/config');
-define("LAYOUT", 'default');
+define("LAYOUT", 'watches');
 
 // получаем http://ishop2.loc/index.php
 $app_path = "http://{$_SERVER['HTTP_HOST']}{$_SERVER['PHP_SELF']}";
