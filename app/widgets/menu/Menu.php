@@ -24,7 +24,6 @@ class Menu
     {
         $this->tpl = __DIR__ . '/menu_tpl/menu.php';
         $this->getOptions($options);
-        debug($this->table);
         $this->run();
     }
 
@@ -46,7 +45,8 @@ class Menu
             if ($this->data) {
                 $this->data = $cats = \R::getAssoc("SELECT * FROM {$this->table}");
             }
-
+            $this->tree = $this->getTree();
+            $this->menuHtml = $this->getMenuHtml($this->tree);
         }
         $this->output();
     }
@@ -56,18 +56,30 @@ class Menu
         echo $this->menuHtml;
     }
 
-    protected function getTree()
-    {
-
+    protected function getTree(){
+        $tree = [];
+        $data = $this->data;
+        foreach ($data as $id => &$node) {
+            if (!$node['parent_id']){
+                $tree[$id] = &$node;
+            }else{
+                $data[$node['parent_id']]['childs'][$id] = &$node;
+            }
+        }
+        return $tree;
     }
 
-    protected function getMenuHtml($tree, $tab = '')
-    {
-
+    protected function getMenuHtml($tree, $tab = ''){
+        $str = '';
+        foreach($tree as $id => $category){
+            $str .= $this->catToTemplate($category, $tab, $id);
+        }
+        return $str;
     }
 
-    protected function catToTemplate($category, $tab, $id)
-    {
-
+    protected function catToTemplate($category, $tab, $id){
+        ob_start();
+        require $this->tpl;
+        return ob_get_clean();
     }
 }
