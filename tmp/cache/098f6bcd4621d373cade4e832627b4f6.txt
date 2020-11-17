@@ -1,1 +1,0 @@
-a:2:{s:4:"data";a:4:{i:0;s:4:"wife";i:1;s:6:"lovers";i:2;s:9:"beautiful";i:3;s:8:"superior";}s:8:"end_time";i:1605189598;}
