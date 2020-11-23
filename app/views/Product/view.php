@@ -16,20 +16,21 @@
         <div class="single-main">
             <div class="col-md-9 single-main-left">
                 <div class="sngl-top">
-                    <div class="col-md-5 single-top-left">
-                        <div class="flexslider">
-                            <ul class="slides">
-                                <li data-thumb="images/s-1.jpg">
-                                    <div class="thumb-image"> <img src="images/s-1.jpg" data-imagezoom="true" class="img-responsive" alt=""/> </div>
-                                </li>
-                                <li data-thumb="images/s-2.jpg">
-                                    <div class="thumb-image"> <img src="images/s-2.jpg" data-imagezoom="true" class="img-responsive" alt=""/> </div>
-                                </li>
-                                <li data-thumb="images/s-3.jpg">
-                                    <div class="thumb-image"> <img src="images/s-3.jpg" data-imagezoom="true" class="img-responsive" alt=""/> </div>
-                                </li>
-                            </ul>
-                        </div>
+                        <?php if ($gallery): ?>
+                        <div class="col-md-5 single-top-left">
+                            <div class="flexslider">
+                                <ul class="slides">
+                                    <?php foreach ($gallery as $item): ?>
+                                    <li data-thumb="images/<?=$item->img; ?>">
+                                        <div class="thumb-image"> <img src="images/<?=$item->img; ?>" data-imagezoom="true" class="img-responsive" alt=""/> </div>
+                                    </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                        <?php else: ?>
+                            <div class="col-md-3 single-top-left">
+                            <img src="images/<?=$product->img; ?>" alt="">
+                        <?php endif; ?>
                      </div>
 
                     <?php
