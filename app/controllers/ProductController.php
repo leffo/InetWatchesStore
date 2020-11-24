@@ -4,6 +4,7 @@
 namespace app\controllers;
 
 
+use app\models\Breadcrumbs;
 use app\models\Product;
 
 class ProductController extends AppController
@@ -15,7 +16,8 @@ class ProductController extends AppController
         if (!$product) {
             throw new \Exception('Страница не найдена', 404);
         }
-        // TODO хлебные крошки
+        // хлебные крошки
+        $breadcrumbs = Breadcrumbs::getBreadcrumbs($product->category_id, $product->title);
 
         // связанные товары
         $related = \R::getAll('SELECT * FROM related_product JOIN product ON 
@@ -37,7 +39,9 @@ class ProductController extends AppController
         $gallery = \R::findAll('gallery', 'product_id = ?', [$product->id]);
 
         // модификации товара
+
+
         $this->setMeta($product->title, $product->description, $product->keywords);
-        $this->set(compact('product', 'related', 'gallery', 'recentlyViewed'));
+        $this->set(compact('product', 'related', 'gallery', 'recentlyViewed', 'breadcrumbs'));
     }
 }
